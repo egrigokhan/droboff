@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Drop Off</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+	<style type="text/css">
+		/* Credit to bootsnipp.com for the css for the color graph */
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+	</style>
+</head>
+<body>
+
+<div class="container"> 
+
+<div class="row" style="margin-top:20px">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+		<form role="form">
+			<fieldset>
+				<h2 style="text-align: center;">Welcome to the <a href="https://www.youtube.com/watch?v=siwpn14IE7E" style="text-decoration: none;">Danger Zone</a></h2>
+				<h5 style="text-align: center;">No user. No problem. Enter a zone and start droppin off.</h5><h5 style="text-align: center;">As simple as file sharing should be.</h5>  
+				<hr class="colorgraph">
+				<div class="form-group">
+                    <input type="text" id="zone" class="form-control input-lg" placeholder="Zone">
+				</div>
+				<div class="form-group">
+                    <input type="password" id="password" class="form-control input-lg" placeholder="Password">
+				</div>
+				<div>
+					<h5 style="color: red; display: none;" id="warning-label">TEST</h5>
+				</div>
+				<span class="button-checkbox">
+					<a href="" class="btn btn-link pull-right">Notify People</a>
+					<br>
+				</span>
+				<hr class="colorgraph">
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6">
+                        <input type="submit" id="enter-zone" onclick="createZone()" class="btn btn-lg btn-success btn-block" value="Enter Zone">
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<a href="" id="create-zone" class="btn btn-lg btn-primary btn-block">Create Zone</a>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+<span style="text-align: center;" class="button-checkbox">
+	<h6 style="text-align: center;">DropOff created, maintained and distributed by <a href="">Gökhan Eğri</a> </h6>
+</span>
+
+</div>
+
+
+</body>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDd3ZU9BQuuOB7xR5ITG-PAeMLqmsWFJCA",
+    authDomain: "dropoff-f9baf.firebaseapp.com",
+    databaseURL: "https://dropoff-f9baf.firebaseio.com",
+    storageBucket: "dropoff-f9baf.appspot.com",
+    messagingSenderId: "676633819327"
+  };
+  firebase.initializeApp(config);
+</script>
+<script type="text/javascript">
+	
+	function createZone() {
+		var zoneName = document.getElementById('zone');
+		var zoneCode = document.getElementById("password");
+		var warningLabel = document.getElementById('warning-label');
+
+		if( zoneName.value == "" || password.value == "" ) {
+			warningLabel.innerHTML = "Please fill in both fields.";
+			warningLabel.style.display = "block";
+		}
+		firebase.auth().createUserWithEmailAndPassword(zoneName.value + "@placeholder.com", zoneCode.value).catch(function(error) {
+			  // Handle Errors here.
+			  var errorCode = error.code;
+			  var errorMessage = error.message;
+			  console.log(errorCode);
+			  console.log(errorMessage);
+			  // ...
+			});
+
+		}
+	
+
+</script>
+
+</html>
